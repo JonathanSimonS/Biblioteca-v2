@@ -4,22 +4,17 @@ package org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio;
  * @author: Jonathan Simón Sánchez
  * 
  **/
-public class Libro {
+public abstract class Libro {
 
 	// Atributos y constantes
-	private static final int PAGINAS_PARA_RECOMPENSA = 25;
-	private static final float PUNTOS_PREMIO = 0.5f;
-
-	private String titulo;
-	private String autor;
-	private int numPaginas;
+	protected String titulo;
+	protected String autor;
 
 	// Constructores
 
-	public Libro(String titulo, String autor, int numPaginas) {
+	public Libro(String titulo, String autor) {
 		setTitulo(titulo);
 		setAutor(autor);
-		setNumPaginas(numPaginas);
 	}
 
 	public Libro(Libro e) {
@@ -28,7 +23,6 @@ public class Libro {
 		}
 		setTitulo(e.getTitulo());
 		setAutor(e.getAutor());
-		setNumPaginas(e.getNumPaginas());
 	}
 
 	// Métodos
@@ -51,15 +45,14 @@ public class Libro {
 		if (titulo.trim().equals("")) {
 			throw new IllegalArgumentException("ERROR: El título no puede estar vacío.");
 		}
-		Libro libroFicticio = new Libro("Cien años de soledad", "Gabriel García Márquez", 275);
-		return libroFicticio;
+ 		return new LibroEscrito("Cien años de soledad", "Gabriel García Márquez", 25);
 	}
 
 	public String getTitulo() {
 		return titulo;
 	}
 
-	private void setTitulo(String titulo) {
+	protected void setTitulo(String titulo) {
 		if (titulo == null) {
 			throw new NullPointerException("ERROR: El título no puede ser nulo.");
 		}
@@ -73,7 +66,7 @@ public class Libro {
 		return autor;
 	}
 
-	private void setAutor(String autor) {
+	protected void setAutor(String autor) {
 		if (autor == null) {
 			throw new NullPointerException("ERROR: El autor no puede ser nulo.");
 		}
@@ -83,29 +76,7 @@ public class Libro {
 		this.autor = autor;
 	}
 
-	public int getNumPaginas() {
-		return numPaginas;
-	}
-
-	private void setNumPaginas(int numPaginas) {
-		if (numPaginas <= 0) {
-			throw new IllegalArgumentException("ERROR: El número de páginas debe ser mayor que cero.");
-		}
-		this.numPaginas = numPaginas;
-	}
-
-	/**
-	 * Va a devolver el número de puntos que se obtienen de un libro
-	 * 
-	 * Obtendremos 0,5 puntos por cada 25 páginas del libro: de 0-24 obtenemos 0,5
-	 * puntos, de 25-49 obtenemos 1 puntos, de 50-74 obtenemos 1,5 puntos, etc.
-	 * 
-	 * @return: puntos
-	 **/
-	public float getPuntos() {
-		float puntos = (float) (Math.ceil(numPaginas /  PAGINAS_PARA_RECOMPENSA+1) * PUNTOS_PREMIO );
-		return puntos;
-	}
+	public abstract float getPuntos();
 
 	@Override
 	public int hashCode() {
@@ -143,7 +114,7 @@ public class Libro {
 
 	@Override
 	public String toString() {
-		return String.format("título=%s, autor=%s, número de páginas=%s", titulo, autor, numPaginas);
+		return String.format("título=%s, autor=%s ", titulo, autor);
 	}
 
 }
