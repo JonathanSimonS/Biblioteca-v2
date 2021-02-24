@@ -1,15 +1,16 @@
-package org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio;
+package org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio.memoria;
 
 import java.time.LocalDate;
 import java.util.*;
 
 import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.*;
+import org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio.IPrestamos;
 
 /**
  * @author: Jonathan Simón Sánchez
  **/
-public class Prestamos {
+public class Prestamos implements IPrestamos{
 
 	private ArrayList<Prestamo> coleccionPrestamos;
 
@@ -126,7 +127,7 @@ public class Prestamos {
 	 * @param: dos fechas
 	 * @return: true si las dos fechas son del mismo mes, false si no lo son
 	 **/
-	public boolean mismoMes(LocalDate fecha1, LocalDate fecha2) {
+	private boolean mismoMes(LocalDate fecha1, LocalDate fecha2) {
 		return (fecha1.getMonth().equals(fecha2.getMonth()) && (fecha1.getYear() == fecha2.getYear()));
 	} // Comtemplo la posibilidad de que el año también sea diferente
 
