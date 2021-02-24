@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio;
+package org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio.memoria;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -7,13 +7,13 @@ import java.util.List;
 import javax.naming.OperationNotSupportedException;
 
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Alumno;
+import org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio.IAlumnos;
 
 /**
  * @author: Jonathan Simón Sánchez
  * 
  **/
-public class Alumnos {
-
+public class Alumnos implements IAlumnos {
 	// Creo el arrayList que contendrá lista de alumnos
 	private ArrayList<Alumno> coleccionAlumnos;
 
