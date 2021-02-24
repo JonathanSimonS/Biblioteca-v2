@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio;
+package org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio.memoria;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -6,13 +6,16 @@ import java.util.List;
 
 import javax.naming.OperationNotSupportedException;
 
+import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.AudioLibro;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.Libro;
+import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.LibroEscrito;
+import org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio.ILibros;
 
 /**
  * @author: Jonathan Simón Sánchez
  * 
  **/
-public class Libros {
+public class Libros implements ILibros{
 
 	// Atributos
 
@@ -31,10 +34,15 @@ public class Libros {
 	}
 
 	private List<Libro> copiaProfundaLibros() {
+		
 		ArrayList<Libro> copiaLibros = new ArrayList<>();
 		for (int i = 0; i < getTamano(); i++) {
 			Libro libro = coleccionLibros.get(i); // Con el método .get guardo al objeto en esa posicion
-			copiaLibros.add(new Libro(libro)); // Voy copiando y almacenando los alumnos }
+			if(libro instanceof LibroEscrito) {
+				copiaLibros.add(new LibroEscrito((LibroEscrito)libro));
+			} else {
+				copiaLibros.add(new AudioLibro((AudioLibro)libro));
+			}
 		}
 		return copiaLibros;
 	}
@@ -50,7 +58,11 @@ public class Libros {
 		if (coleccionLibros.contains(libro)) {
 			throw new OperationNotSupportedException("ERROR: Ya existe un libro con ese título y autor.");
 		} else {
-			coleccionLibros.add(new Libro(libro));
+			if(libro instanceof LibroEscrito) {
+				coleccionLibros.add(new LibroEscrito((LibroEscrito)libro));
+			} else {
+				coleccionLibros.add(new AudioLibro((AudioLibro)libro));
+			}
 		}
 	}
 
@@ -61,8 +73,12 @@ public class Libros {
 		if (!coleccionLibros.contains(libro)) {
 			return null;
 		} else {
-			int indice = coleccionLibros.indexOf(libro);
-			return new Libro(coleccionLibros.get(indice));
+			if(libro instanceof LibroEscrito) {
+				int indice = coleccionLibros.indexOf(libro);
+				return new LibroEscrito((LibroEscrito) coleccionLibros.get(indice));
+			} else {
+				int indice = coleccionLibros.indexOf(libro);
+				return new AudioLibro((AudioLibro) coleccionLibros.get(indice));			}
 		}
 	}
 
