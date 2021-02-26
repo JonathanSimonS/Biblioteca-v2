@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.naming.OperationNotSupportedException;
 import org.iesalandalus.programacion.biblioteca.mvc.vista.*;
-import org.iesalandalus.programacion.biblioteca.mvc.controlador.Controlador;
+import org.iesalandalus.programacion.biblioteca.mvc.controlador.IControlador;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.*;
 
 /**
@@ -15,7 +15,7 @@ import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.*;
 public class VistaTexto implements IVista {
 
 	// Atributos
-	private Controlador controlador;
+	private IControlador controlador;
 
 	// M.Constructor
 	public VistaTexto() {
@@ -23,7 +23,7 @@ public class VistaTexto implements IVista {
 	}
 
 	@Override
-	public void setControlador(Controlador controlador) {
+	public void setControlador(IControlador controlador) {
 		if (controlador == null) {
 			throw new NullPointerException("ERROR: El controlador no puede ser nulo.");
 		}
@@ -238,8 +238,8 @@ public class VistaTexto implements IVista {
 	public void mostrarEstadisticaMensualPorCurso() {
 		Prestamo prestamo = controlador.buscar(Consola.leerPrestamoFicticio());
 		LocalDate fecha = prestamo.getFechaPrestamo();
-		String cadena="";
-		fecha = LocalDate.parse(cadena,DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		String cadena = "";
+		fecha = LocalDate.parse(cadena, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 		controlador.getEstadisticaMensualPorCurso(Consola.leerFecha(cadena));
 	}
 

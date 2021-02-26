@@ -1,9 +1,11 @@
-package org.iesalandalus.programacion.biblioteca.mvc.vista;
+package org.iesalandalus.programacion.biblioteca.mvc.vista.texto;
+
 
 /**
- * @author: Jonathan Simón Sánchez
- * 
- **/
+ * @author Jonathan Simón
+ * @version v2
+ *
+ */
 public enum Opcion {
 
 	INSERTAR_ALUMNO(" Insertar alumno") {
@@ -116,7 +118,7 @@ public enum Opcion {
 		}
 	};
 
-	private static Vista vista;
+	private static VistaTexto vista;
 	private String mensaje;
 
 	// Métodos
@@ -126,7 +128,7 @@ public enum Opcion {
 
 	public abstract void ejecutar();
 
-	protected static void setVista(Vista vista) {
+	protected static void setVista(VistaTexto vista) {
 		Opcion.vista = vista;
 	}
 

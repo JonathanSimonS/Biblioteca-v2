@@ -120,6 +120,7 @@ public class Prestamos implements IPrestamos{
 		prestamosPorFecha.sort(comparadorPrestamo);
 		return prestamosPorFecha;
 	}
+	
 
 	/**
 	 * Compara si dos fechas son del mismo mes
@@ -140,7 +141,7 @@ public class Prestamos implements IPrestamos{
 		List<Prestamo> prestamosMensuales = get(fecha);		
 		for (Prestamo prestamo : prestamosMensuales) {
 			Curso cursoAlumno=prestamo.getAlumno().getCurso();
-			estadisticaMensual.put(cursoAlumno, estadisticaMensual.get(cursoAlumno));
+			estadisticaMensual.put(cursoAlumno, estadisticaMensual.get(cursoAlumno) + prestamo.getPuntos());
 		}
 		return estadisticaMensual;
 	}

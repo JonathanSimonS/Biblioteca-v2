@@ -1,4 +1,4 @@
-package org.iesalandalus.programacion.biblioteca.mvc.vista;
+package org.iesalandalus.programacion.biblioteca.mvc.vista.texto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -88,19 +88,42 @@ public class Consola {
 		String titulo;
 		String autor;
 		int numPaginas;
+		int duracion;
+
+		// Preguntamos el tipo de libro
+		int opcion;
+		do {
+			System.out.println("Introduce el número correspondiente al tipo de libro: ");
+			System.out.println("0. -Libro escrito.");
+			System.out.println("1. -Audio libro.");
+			opcion = Entrada.entero();
+		} while (opcion <0 || opcion >1);
+
 		do {
 			System.out.println("Introduce el título del libro: ");
 			titulo = Entrada.cadena();
 		} while (titulo == null || titulo.equals(""));
+
 		do {
 			System.out.println("Introduce el autor del libro: ");
 			autor = Entrada.cadena();
 		} while (autor == null || autor.equals(""));
-		do {
-			System.out.println("Introduce las páginas del libro del libro: ");
-			numPaginas = Entrada.entero();
-		} while (numPaginas <= 0);
-		return new Libro(titulo, autor, numPaginas);
+
+		if (opcion == 0) {
+			do {
+				System.out.println("Introduce las páginas del libro: ");
+				numPaginas = Entrada.entero();
+			} while (numPaginas <= 0);
+			
+			return new LibroEscrito(titulo, autor, numPaginas);
+		} else {
+			do {
+				System.out.println("Introduce la duración del audio libro: ");
+				duracion = Entrada.entero();
+			} while (duracion <= 0);
+			
+			return new AudioLibro(titulo, autor, duracion);
+		}
 
 	}
 

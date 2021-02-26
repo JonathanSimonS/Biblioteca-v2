@@ -29,9 +29,9 @@ public class Modelo implements IModelo {
 
 	// M.Constructor
 	public Modelo(IFuenteDatos iFuenteDatos) {
-		iFuenteDatos.crearAlumnos();
-		iFuenteDatos.crearLibros();
-		iFuenteDatos.crearPrestamos();
+		alumnos=iFuenteDatos.crearAlumnos();
+		libros=iFuenteDatos.crearLibros();
+		prestamos=iFuenteDatos.crearPrestamos();
 	}
 
 	// Métodos

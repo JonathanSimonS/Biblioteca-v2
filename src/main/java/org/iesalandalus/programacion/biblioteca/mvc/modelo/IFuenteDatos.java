@@ -8,7 +8,7 @@ import org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio.ILibros;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.negocio.IPrestamos;
 
 /**
- * @author lemon
+ * @author Jonathan Simón
  *
  */
 public interface IFuenteDatos {
