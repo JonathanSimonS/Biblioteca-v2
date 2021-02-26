@@ -1,29 +1,28 @@
-package org.iesalandalus.programacion.biblioteca.mvc.vista;
+package org.iesalandalus.programacion.biblioteca.mvc.vista.texto;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
-
 import javax.naming.OperationNotSupportedException;
-
+import org.iesalandalus.programacion.biblioteca.mvc.vista.*;
 import org.iesalandalus.programacion.biblioteca.mvc.controlador.Controlador;
 import org.iesalandalus.programacion.biblioteca.mvc.modelo.dominio.*;
 
 /**
  * @author: Jonathan Simón Sánchez
- * 
+ * @version v2
  **/
-public class Vista {
+public class VistaTexto implements IVista {
 
 	// Atributos
 	private Controlador controlador;
 
 	// M.Constructor
-	public Vista() {
+	public VistaTexto() {
 		Opcion.setVista(this);
 	}
 
+	@Override
 	public void setControlador(Controlador controlador) {
 		if (controlador == null) {
 			throw new NullPointerException("ERROR: El controlador no puede ser nulo.");
@@ -31,6 +30,7 @@ public class Vista {
 		this.controlador = controlador;
 	}
 
+	@Override
 	public void comenzar() {
 		int opcion;
 		do {
@@ -41,11 +41,13 @@ public class Vista {
 		} while (opcion != Opcion.SALIR.ordinal());
 	}
 
+	@Override
 	public void terminar() {
 		controlador.terminar();
 	}
 
 	// Métodos Alumno
+	@Override
 	public void insertarAlumno() {
 		try {
 			controlador.insertar(Consola.leerAlumno());
@@ -55,6 +57,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void buscarAlumno() {
 		Alumno alumno;
 		try {
@@ -66,6 +69,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void borrarAlumno() {
 		try {
 			controlador.borrar(Consola.leerAlumnoFicticio());
@@ -75,6 +79,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void listarAlumnos() {
 		List<Alumno> alumnos = controlador.getAlumnos();
 		if (alumnos != null) {
@@ -88,6 +93,7 @@ public class Vista {
 	}
 
 	// Métodos Libro
+	@Override
 	public void insertarLibro() {
 		try {
 			controlador.insertar(Consola.leerLibro());
@@ -97,6 +103,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void buscarLibro() {
 		Libro libro;
 		try {
@@ -108,6 +115,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void borrarLibro() {
 		try {
 			controlador.borrar(Consola.leerLibroFicticio());
@@ -117,6 +125,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void listarLibros() {
 		List<Libro> libros = controlador.getLibros();
 		if (libros != null) {
@@ -129,6 +138,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void prestarLibro() {
 		try {
 			controlador.prestar(Consola.leerPrestamo());
@@ -138,6 +148,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void devolverLibro() {
 		try {
 			controlador.devolver(Consola.leerPrestamo(), LocalDate.now());
@@ -149,6 +160,7 @@ public class Vista {
 
 	// Métodos Prestamo
 
+	@Override
 	public void buscarPrestamo() {
 		Prestamo prestamo;
 		try {
@@ -160,6 +172,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void borrarPrestamo() {
 		try {
 			controlador.borrar(Consola.leerPrestamoFicticio());
@@ -169,6 +182,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void listarPrestamos() {
 		List<Prestamo> prestamos = controlador.getPrestamos();
 		if (prestamos != null) {
@@ -181,6 +195,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void listarPrestamosAlumno() {
 		List<Prestamo> prestamos = controlador.getPrestamos(Consola.leerAlumnoFicticio());
 		if (prestamos != null) {
@@ -193,6 +208,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void listarPrestamosLibro() {
 		List<Prestamo> prestamos = controlador.getPrestamos(Consola.leerLibroFicticio());
 		if (prestamos != null) {
@@ -205,6 +221,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void listarPrestamosFecha() {
 		List<Prestamo> prestamos = controlador.getPrestamos(Consola.leerPrestamo().getFechaPrestamo());
 		if (prestamos != null) {
@@ -217,6 +234,7 @@ public class Vista {
 		}
 	}
 
+	@Override
 	public void mostrarEstadisticaMensualPorCurso() {
 		Prestamo prestamo = controlador.buscar(Consola.leerPrestamoFicticio());
 		LocalDate fecha = prestamo.getFechaPrestamo();
